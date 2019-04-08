@@ -2,53 +2,74 @@ const dict = require('cmu-pronouncing-dictionary')
 const merge = require('lodash').merge
 const sortBy = require('lodash').sortBy
 
-var words = []
+var dictionary = []
 Object.keys(dict).forEach(function (word) {
-  words.push({
+  dictionary.push({
     word: word,
     pron: dict[word]
   })
 })
 
 module.exports = function rhymes (input) {
-  if (!input) return []
+  if (!input) return [[],[]];
 
-  input = input.toLowerCase()
+  input = input.toLowerCase();
 
-  if (!dict[input]) return []
+  if (!dict[input]) return [[],[]];
 
-  var inputPron = dict[input]
-  var results = []
+  let inputPron = dict[input];
+  let alliterations = [];
+  let rhymes = [];
 
-  words.forEach(function (word) {
-    var score = countMatchingTrailingSyllablesInPronunciations(inputPron, word.pron)
-    if (score > 1) {
-      results.push(merge(word, { score: score }))
+  dictionary.forEach(function (word) {
+    var scores = countMatchingSyllables(inputPron, word.pron)
+    if (scores[0] > 1) {
+      alliterations.push(merge(word, { score: scores[0] }))
+    }
+    if (scores[1] > 1) {
+      rhymes.push(merge(word, { score: scores[1] }))
     }
   })
 
-  results = sortBy(results, 'score')
-    .reverse()
-    .slice(0, 20)
+  alliterations = sortBy(alliterations, 'score').reverse().slice(0, 20);
+  rhymes = sortBy(rhymes, 'score').reverse().slice(0, 20);
 
-  return results
+  return [alliterations, rhymes]
 }
 
-module.exports.words = words
+module.exports.dictionary = dictionary
 
-function countMatchingTrailingSyllablesInPronunciations (a, b) {
-  a = a.split(' ').reverse()
-  b = b.split(' ').reverse()
-  var score = 0
-  var shorterPron = (a.length < b.length) ? a : b
+function countMatchingSyllables (aWord, bWord) {
 
-  for (var i in shorterPron) {
-    if (a[i] === b[i]) {
-      score++
-    } else {
-      return score
-    }
+  let aSyllables = aWord.split(' ');
+  let bSyllables = bWord.split(' ');
+
+  if (aSyllables.length < bSyllables.length) {
+    /* switch a and b */
+    const cSyllables = aSyllables;
+    aSyllables = bSyllables;
+    bSyllables = cSyllables;
   }
 
-  return score
+  function score() {
+    let score = 0
+    for (var i in aSyllables) {
+      if (aSyllables[i] === bSyllables[i]) {
+        score++
+      } else {
+        return score
+      }
+    }
+    return score
+  }
+
+  const alliterationScore = score();
+
+  aSyllables = aSyllables.reverse()
+  bSyllables = bSyllables.reverse()
+
+  const rhymeScore = score();
+
+  return [alliterationScore, rhymeScore];
+
 }
