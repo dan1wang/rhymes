@@ -7,7 +7,7 @@ const dictionary: {[key: string]: string[]} = {};
 
 Object.keys(cmu).forEach((key) => {
   const pron = cmu[key].replace(/[0-9]+$/g, '');  // Remove all stress
-  const word = key.replace(/\(\d+\)$/, '');  // Merge alt. pronunciations
+  const word = key.replace(/\(\d+\)$/, '');       // Merge alt. pronunciations
   if (dictionary.hasOwnProperty(word)) {
     dictionary[word].push(pron);
   } else {
