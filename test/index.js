@@ -1,50 +1,88 @@
 /* globals describe, it */
 
-const expect = require('code').expect
-const rhymes = require('..')
-var monkey = rhymes('monkey')
+var rhymes = require('../dist').rhymes;
+var assert = require('chai').assert;
 
-describe('rhymes', function () {
-  it('is a fun function', function () {
-    expect(rhymes).to.be.a.function()
-  })
+describe('rhyming.ly', function() {
+  it('should have a rhymes function ', function() {
+    assert.isFunction(rhymes);
+  });
+});
 
-  it('returns an array of result objects', function () {
-    expect(monkey).to.be.an.array()
-    expect(monkey).to.not.be.empty()
-    expect(monkey[0]).to.be.an.object()
-  })
+var english;
 
-  describe('each result object', function () {
-    it('has a `word` property', function () {
-      expect(monkey[0].word).to.exist()
-    })
-    it('has a `pron` property', function () {
-      expect(monkey[0].pron).to.exist()
-    })
-    it('has a `score` property', function () {
-      expect(monkey[0].score).to.exist()
-    })
-  })
+describe('rhymes()', function() {
+  english = rhymes('english');
 
-  it('returns an empty array for empty input values', function () {
-    expect(rhymes()).to.be.an.array()
-    expect(rhymes('')).to.be.an.array()
-  })
+  it('should return matches for "english"', function() {
+    assert.isObject(english);
+    assert.property(english, 'rhymes');
+    assert.property(english, 'alliterations');
+    assert.isArray(english.rhymes);
+    assert.isArray(english.alliterations);
+    assert.isNotEmpty(english.rhymes);
+    assert.isNotEmpty(english.alliterations);
+  });
 
-  it('returns an empty array if word is not in corpus', function () {
-    expect(rhymes.words['sdfokusdls']).to.be.undefined()
-    expect(rhymes('sdfokusdls')).to.be.an.array()
-  })
+  describe('each alliteration match', function() {
+    it('should have a `word` property', function() {
+      assert.property(english.alliterations[0], 'word');
+      assert.isString(english.alliterations[0].word);
+    });
+    it('should have a `score` property', function() {
+      assert.property(english.alliterations[0], 'score');
+      assert.isNumber(english.alliterations[0].score);
+    });
+  });
 
-  // it('returns an empty array if word is in corpus but has no matches', function () {
-  //   expect(rhymes.words['zoghby']).to.be.a.string()
-  //   expect(rhymes('zoghby')).to.be.an.array()
-  // })
+  describe('each rhyme match', function() {
+    it('should have a `word` property', function() {
+      assert.property(english.rhymes[0], 'word');
+      assert.isString(english.rhymes[0].word);
+    });
+    it('should have a `score` property', function() {
+      assert.property(english.rhymes[0], 'score');
+      assert.isNumber(english.rhymes[0].score);
+    });
+  });
+});
 
-  it('finds matches regardless of input case', function () {
-    expect(rhymes('CAT')).to.be.an.array()
-    expect(rhymes('CAT')).to.not.be.empty()
-    expect(rhymes('CAT')).to.equal(rhymes('cat'))
-  })
-})
+describe('rhymes', function() {
+  var empty = rhymes('');
+
+  it('should return empty result for "" input', function() {
+    assert.isObject(empty);
+    assert.property(empty, 'rhymes');
+    assert.property(empty, 'alliterations');
+    assert.isArray(empty.rhymes);
+    assert.isArray(empty.alliterations);
+    assert.isEmpty(empty.rhymes);
+    assert.isEmpty(empty.alliterations);
+  });
+
+  empty = rhymes();
+  it('should return empty result for no input', function() {
+    assert.isObject(empty);
+    assert.property(empty, 'rhymes');
+    assert.property(empty, 'alliterations');
+    assert.isArray(empty.rhymes);
+    assert.isArray(empty.alliterations);
+    assert.isEmpty(empty.rhymes);
+    assert.isEmpty(empty.alliterations);
+  });
+
+  var sdfokusdls = rhymes('sdfokusdls');
+  it('should return empty result if input word is not in corpus', function() {
+    assert.isObject(sdfokusdls);
+    assert.property(sdfokusdls, 'rhymes');
+    assert.property(sdfokusdls, 'alliterations');
+    assert.isArray(sdfokusdls.rhymes);
+    assert.isArray(sdfokusdls.alliterations);
+    assert.isEmpty(sdfokusdls.rhymes);
+    assert.isEmpty(sdfokusdls.alliterations);
+  });
+
+  it('finds matches regardless of input case', function() {
+    assert.deepEqual(rhymes('ENGLISH'), english);
+  });
+});
