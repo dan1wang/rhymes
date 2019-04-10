@@ -3,6 +3,7 @@
 [![Build Status][badge-build]][badge-link-build]
 [![dependencies Status][badge-dep]][badge-link-dep]
 [![devDependencies Status][badge-dev-dep]][badge-link-dev-dep]
+[![codecov][badge-codecov]][badge-link-codecov]
 [![Code Style: Google][badge-gts]][badge-link-gts]
 
 Give me an English word and I&#39;ll give you a list of
@@ -197,12 +198,14 @@ Output
 }
 ```
 
+  [badge-link-codecov]: https://codecov.io/gh/dan1wang/rhyming.ly
   [badge-link-dep]: https://david-dm.org/dan1wang/rhyming.ly
   [badge-link-dev-dep]: https://david-dm.org/dan1wang/rhyming.ly?type=dev
   [badge-link-build]: https://travis-ci.org/dan1wang/rhyming.ly
   [badge-link-gts]: https://github.com/google/gts  
   [badge-link-npm]: https://www.npmjs.com/package/rhyming.ly
   
+  [badge-codecov]: https://codecov.io/gh/dan1wang/rhyming.ly/branch/ts-master/graph/badge.svg
   [badge-dep]: https://david-dm.org/dan1wang/rhyming.ly/status.svg
   [badge-dev-dep]: https://david-dm.org/dan1wang/rhyming.ly/dev-status.svg
   [badge-build]: https://travis-ci.org/dan1wang/rhyming.ly.svg?branch=ts-master
