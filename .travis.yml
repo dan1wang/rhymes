@@ -7,11 +7,10 @@ notifications:
 scripts:
   - npm install codecov -g
   - npm test
+after_success:
   - codecov -f coverage/*.json
 node_js:
   - '10'
-  - '8'
-  - '6'
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
