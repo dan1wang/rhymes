@@ -4,10 +4,6 @@ cache:
     - ~/.npm
 notifications:
   email: false
-scripts:
-  - npm install codecov -g
-after_success:
-  - codecov
 node_js:
   - '10'
 branches:

@@ -18,14 +18,15 @@
     "check-ts": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
+    "cov": "nyc report --reporter=json && codecov -f coverage/*.json",
     "fix": "npm run fix-ts && npm run fix-js",
     "fix-js": "prettier --write src/*.js test/*.js",
     "fix-ts": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check",
+    "posttest": "npm run check && npm run cov",
     "release": "standard-version",
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "repository": "https://github.com/dan1wang/rhyming.ly",
   "bugs": "https://github.com/dan1wang/rhyming.ly/issues",
@@ -43,7 +44,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "cmu-pronouncing-dictionary": "^1.0.1"
+    "cmu-pronouncing-dictionary": "^1.0.1",
+    "codecov": "^3.3.0",
+    "nyc": "^13.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
