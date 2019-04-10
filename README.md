@@ -1,7 +1,9 @@
 # rhyming.ly
-
-[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
-[![Build Status](https://travis-ci.org/dan1wang/rhyming.ly.svg?branch=ts-master)](https://travis-ci.org/dan1wang/rhyming.ly)
+[![NPM version][badge-npm]][badge-link-npm]
+[![Build Status][badge-build]][badge-link-build]
+[![dependencies Status][badge-dep]][badge-link-dep]
+[![devDependencies Status][badge-dev-dep]][badge-link-dev-dep]
+[![Code Style: Google][badge-gts]][badge-link-gts]
 
 Give me an English word and I&#39;ll give you a list of
 **alliterations** and **rhymes**
@@ -194,3 +196,15 @@ Output
    ]
 }
 ```
+
+  [badge-link-dep]: https://david-dm.org/dan1wang/rhyming.ly
+  [badge-link-dev-dep]: https://david-dm.org/dan1wang/rhyming.ly?type=dev
+  [badge-link-build]: https://travis-ci.org/dan1wang/rhyming.ly
+  [badge-link-gts]: https://github.com/google/gts  
+  [badge-link-npm]: https://www.npmjs.com/package/rhyming.ly
+  
+  [badge-dep]: https://david-dm.org/dan1wang/rhyming.ly/status.svg
+  [badge-dev-dep]: https://david-dm.org/dan1wang/rhyming.ly/dev-status.svg
+  [badge-build]: https://travis-ci.org/dan1wang/rhyming.ly.svg?branch=ts-master
+  [badge-gts]: https://img.shields.io/badge/code%20style-google-blueviolet.svg
+  [badge-npm]: https://img.shields.io/npm/v/rhyming.ly.svg

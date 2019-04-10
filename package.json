@@ -1,8 +1,15 @@
 {
   "name": "rhyming.ly",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Give me an English word and I'll give you a list of alliterations and rhymes",
   "main": "dist/index.js",
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "dist/*.d.ts",
+    "dist/*.js"
+  ],
   "scripts": {
     "build": "tsc",
     "build-docs": "typedoc",
@@ -17,16 +24,17 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
+    "release": "standard-version",
     "test": "mocha"
   },
-  "repository": "https://github.com/dan1wang/rhymes",
-  "bugs": "https://github.com/dan1wang/rhymes/issues",
+  "repository": "https://github.com/dan1wang/rhyming.ly",
+  "bugs": "https://github.com/dan1wang/rhyming.ly/issues",
   "keywords": [
     "alliteration",
     "cmu",
     "english",
     "language",
-    "rhymes",
+    "rhyme",
     "words"
   ],
   "author": "Daniel Wang <daniel.liberated@gmail.com> (https://github.com/dan1wang/)",
@@ -42,9 +50,10 @@
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.12.0",
     "gts": "^0.9.0",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.2",
     "prettier": "^1.15.3",
+    "standard-version": "^5.0.2",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.4"
+    "typescript": "^3.4.3"
   }
 }

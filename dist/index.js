@@ -5,8 +5,8 @@ const cmu = cmulib;
 const dictionary = {};
 Object.keys(cmu).forEach((key) => {
     const pron = cmu[key].replace(/[0-9]+$/g, ''); // Remove all stress
-    const word = key.replace(/\(\d+\)$/, ''); // Merge alternative pronunciations
-    if (dictionary.hasOwnProperty(word)) { // dictionary[word] fails on "constructor"
+    const word = key.replace(/\(\d+\)$/, ''); // Merge alt. pronunciations
+    if (dictionary.hasOwnProperty(word)) {
         dictionary[word].push(pron);
     }
     else {
